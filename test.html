@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Offres HyperIA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Space Grotesk', sans-serif;
+      background-color: #0e0e0e;
+      color: white;
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #ffffff;
+      margin-bottom: 2rem;
+    }
+    .offers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      justify-content: center;
+    }
+    .card {
+      background: linear-gradient(145deg, #1b1b1b, #141414);
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+      max-width: 360px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card.essentiel:hover,
+    .card.standard:hover,
+    .card.intensif:hover {
+      box-shadow: 0 0 25px 4px rgba(74, 144, 226, 0.4);
+    }
+    .price {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #3EDC81;
+      margin: 1rem 0;
+    }
+    .highlight {
+      background-color: #4A90E2;
+      padding: 0.3rem 0.6rem;
+      border-radius: 1rem;
+      font-size: 0.8rem;
+      display: inline-block;
+      margin-bottom: 1rem;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta {
+      background: linear-gradient(to right, #4A90E2, #8A6FF7);
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-weight: bold;
+      margin-top: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      width: fit-content;
+      align-self: center;
+    }
+    .cta:hover {
+      opacity: 0.9;
+    }
+    details summary {
+      cursor: pointer;
+      font-weight: 500;
+      margin-top: 1rem;
+      color: #aaa;
+      list-style: none;
+    }
+    summary::-webkit-details-marker {
+      display: none;
+    }
+    summary::after {
+      content: " ▼";
+      font-weight: normal;
+      color: #666;
+    }
+    details[open] summary::after {
+      content: " ▲";
+      font-weight: normal;
+      color: #666;
+    }
+    details p {
+      text-align: left;
+      padding: 1rem;
+      background-color: #1c1c1c;
+      border-radius: 0.5rem;
+      line-height: 1.6;
+      font-size: 0.9rem;
+    }
+    .row-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 3rem;
+      width: 100%;
+    }
+    .flex-showcase {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+    
+      .text-block {
+  text-align: left;
+  align-self: center;
+}
+    .cta-contact {
+    background: linear-gradient(to right, #8A6FF7, #4A90E2);
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.8rem;
+    font-size: 1.1rem;
+    border-radius: 0.6rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(138, 111, 247, 0.3);
+  }
+  .cta-contact:hover {
+    background: #4A90E2;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(74, 144, 226, 0.4);
+  }
+  .team-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(74, 144, 226, 0.4);
+  }
+  .best-badge {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(to right, #4A90E2, #8A6FF7);
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+    box-shadow: 0 0 10px rgba(74, 144, 226, 0.4);
+  }
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.fade-in-section.visible {
+  opacity: 1;
+  transform: none;
+}
+.hero-image {
+  animation: zoomHero 20s ease-in-out infinite alternate;
+}
+@keyframes zoomHero {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); }
+}
+.team-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.team-section.visible {
+  opacity: 1;
+  transform: none;
+}
+</style>
+  <style>
+    .video-frame {
+      width: 100%;
+      max-width: 180px;
+      min-height: 320px;
+    }
+    .phone-style {
+  width: 180px;
+  height: 320px;
+  border: 10px solid #1c1c1c;
+  border-radius: 2rem;
+  background: black;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  transition: box-shadow 0.4s ease-in-out;
+}
+.phone-style:hover {
+  box-shadow: 0 0 25px 6px rgba(74, 144, 226, 0.4);
+}
+    .phone-style iframe {
+  width: 100%;
+  height: 100%;
+  border-radius: 1.8rem;
+  border: none;
+}
+    @media (min-width: 768px) {
+      .flex-showcase {
+        flex-direction: row-reverse;
+        align-items: center;
+        justify-content: center;
+        gap: 3rem;
+      }
+      .text-block {
+        align-self: center;
+      }
+    }
+  </style>
+<style>
+    .section-separator {
+      border: none;
+      height: 2px;
+      background: linear-gradient(to right, #4A90E2, #8A6FF7);
+      margin: 4rem auto;
+      width: 80%;
+    }
+    
+    
+</style>
+
+<style>
+  #progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(to right, #4A90E2, #8A6FF7);
+    width: 0%;
+    z-index: 9999;
+    transition: width 0.25s ease-out;
+  }
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+
+<!-- Hero Section -->
+<div class="fade-in-section">
+<div style="display: flex; flex-wrap: wrap; height: 80vh; align-items: center; justify-content: center; background: none;">
+  <div style="flex: 1; min-width: 300px; padding: 2rem; display: flex; flex-direction: column; justify-content: center; align-items: flex-start;">
+    <h1 style="font-size: 3rem; line-height: 1.2; margin-bottom: 1rem; color: #ffffff;">HyperIA,<br>création vidéo IA sans limite</h1>
+    <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });" class="cta-contact" style="margin-top: 1.5rem;">Nous contacter</button>
+  </div>
+  <div class="hero-image" style="flex: 1; min-width: 300px; height: 100%; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1506765515384-028b60a970df?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80') center/cover no-repeat; border-radius: 0;"></div>
+</div>
+
+<body>
+  <div class="container fade-in-section">
+    <h1>Nos Offres</h1>
+    <div class="offers">
+  <div class="row-wrapper">
+    <div class="card essentiel">
+      <div class="highlight">Essentiel</div>
+      <h2>490 € TTC</h2>
+      <p>Contenu rapide, efficace et prêt à diffuser.</p>
+      <button class="cta">Choisir ce pack</button>
+      <details>
+        <summary>Plus de détails</summary>
+        <p>
+          1 concept créatif<br>
+          1 moodboard express<br>
+          1 vidéo verticale (15-30s)<br>
+          1 visuel statique<br>
+          2 itérations<br>
+          Formats 9:16 + carré
+        </p>
+      </details>
+    </div>
+    <div class="card standard">
+  <div class="best-badge">Meilleur choix</div>
+      <div class="highlight">Standard</div>
+      <h2>990 € TTC</h2>
+      <p>Présence régulière sur les réseaux pendant plusieurs jours.</p>
+      <button class="cta">Choisir ce pack</button>
+      <details>
+        <summary>Plus de détails</summary>
+        <p>
+          2 concepts + moodboard<br>
+          Prompt IA multi-essais<br>
+          2 vidéos courtes<br>
+          2 visuels ads/post<br>
+          Variante texte + 3 itérations
+        </p>
+      </details>
+    </div>
+  </div>
+  <div style="margin-top: 2rem; display: flex; justify-content: center;">
+    <div class="card intensif">
+      <div class="highlight">Intensif</div>
+      <h2>1490 € TTC</h2>
+      <p>Campagne complète avec approche storytelling & multi-formats.</p>
+      <button class="cta">Choisir ce pack</button>
+      <details>
+        <summary>Plus de détails</summary>
+        <p>
+          Atelier stratégique + 3 concepts<br>
+          Moodboard & voice-over<br>
+          3 vidéos + teaser<br>
+          3 visuels + sous-titrage<br>
+          Script post + 5 itérations<br>
+          Formats multiples prêts à l'emploi
+        </p>
+      </details>
+    </div>
+  </div>
+</div>
+<hr class="section-separator" style="margin: 2rem auto;">
+
+  </div>
+  <div class="container fade-in-section" style="margin-top: 4rem;">
+  <h1 style="font-size: 2.3rem; color: #ffffff;">Adieu les contraintes !</h1>
+  <div class="flex-showcase" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 2rem;">
+  <div class="text-block" style="flex: 1; min-width: 280px; max-width: 50%;">
+    <ul style="font-size: 1.05rem; line-height: 1.8; color: #ccc; padding-left: 1rem; margin: 0;">
+      <li>Créez des scènes spectaculaires sans logistique complexe.</li>
+      <li>Mettez votre produit en avant dans des décors impossibles.</li>
+      <li>Laissez libre cours à votre imagination, l’IA fait le reste.</li>
+    </ul>
+  </div>
+  <div class="video-frame" style="flex: 1; min-width: 280px; max-width: 50%; display: flex; flex-direction: column; align-items: center;">
+    <div class="phone-style">
+      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <button class="cta-contact" onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });">Nous contacter</button>
+  </div>
+</div>
+<hr class="section-separator">
+
+  
+
+<div class="container fade-in-section" id="contact">
+  <h1 style="font-size: 2.3rem; color: #ffffff;">Contactez-nous</h1>
+  <form id="contact-form" style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 500px; margin: auto; background: #1c1c1c; padding: 2rem; border-radius: 1rem; box-shadow: 0 0 20px rgba(74, 144, 226, 0.2);">
+    <input type="text" name="name" placeholder="Votre nom" required style="padding: 0.8rem 1rem; background: transparent; border: 1px solid #4A90E2; border-radius: 0.5rem; color: white; font-size: 1rem;">
+    <input type="email" name="email" placeholder="Votre email" required style="padding: 0.8rem 1rem; background: transparent; border: 1px solid #4A90E2; border-radius: 0.5rem; color: white; font-size: 1rem;">
+    <select id="offer-select" name="offer" required style="padding: 0.8rem 1rem; background: #1c1c1c; border: 1px solid #4A90E2; border-radius: 0.5rem; color: white; font-size: 1rem; appearance: none; background-image: url('data:image/svg+xml;utf8,<svg fill=\'%234A90E2\' height=\'24\' viewBox=\'0 0 24 24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M7 10l5 5 5-5z\'/></svg>'); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1.5rem;">
+      <option value="">Choisissez une offre</option>
+      <option value="Essentiel">Essentiel</option>
+      <option value="Standard">Standard</option>
+      <option value="Intensif">Intensif</option>
+      <option value="Autre">Autre</option>
+    </select>
+    <textarea name="message" placeholder="Votre message" rows="5" required style="padding: 0.8rem 1rem; background: transparent; border: 1px solid #4A90E2; border-radius: 0.5rem; color: white; font-size: 1rem;"></textarea>
+    <button type="submit" class="cta-contact" style="margin-top: 1rem;">Envoyer</button>
+  </form>
+</div>
+
+<hr class="section-separator">
+<div class="container fade-in-section" style="margin-top: 4rem;">
+  <h1 style="font-size: 2.3rem; color: #ffffff;">Notre expertise</h1>
+  <p style="color: #aaa; margin-bottom: 2rem;">Notre équipe est issue d’univers créatifs et exigeants.</p>
+  <div class="logo-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2rem; align-items: center; justify-items: center;">
+    <img src="/mnt/data/aceb07a3-9de3-4ea2-9deb-35f5d2d7d34c.png" alt="Dior" style="max-width: 120px; height: auto; opacity: 0.7; transition: all 0.3s ease; filter: grayscale(100%);">
+    <img src="https://via.placeholder.com/120x60.png?text=Van+Cleef" alt="Van Cleef & Arpels" style="max-width: 120px; opacity: 0.7; transition: all 0.3s ease; filter: grayscale(100%);">
+    <img src="https://via.placeholder.com/120x60.png?text=Orange" alt="Orange" style="max-width: 120px; opacity: 0.7; transition: all 0.3s ease; filter: grayscale(100%);">
+    <img src="https://via.placeholder.com/120x60.png?text=SNCF" alt="SNCF" style="max-width: 120px; opacity: 0.7; transition: all 0.3s ease; filter: grayscale(100%);">
+    <img src="https://via.placeholder.com/120x60.png?text=Logo+5" alt="Logo 5" style="max-width: 120px; opacity: 0.7; transition: all 0.3s ease; filter: grayscale(100%);">
+    <img src="https://via.placeholder.com/120x60.png?text=Logo+6" alt="Logo 6" style="max-width: 120px; opacity: 0.7; transition: all 0.3s ease; filter: grayscale(100%);">
+  </div>
+</div>
+
+<hr class="section-separator">
+<div class="container fade-in-section" style="margin-top: 4rem;">
+<h1 style="font-size: 2.3rem; color: #ffffff;">Notre équipe</h1>
+  <div class="team-section" style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center;">
+    <div class="team-card" style="background: #1c1c1c; padding: 1.5rem; border-radius: 1rem; width: 260px; text-align: center; box-shadow: 0 0 20px rgba(74, 144, 226, 0.2);">
+      <img src="/mnt/data/1725720833145 (2).jpg" alt="Gauthier Asselin" style="width: 100%; border-radius: 1rem; margin-bottom: 1rem;">
+      <h3 style="margin: 0; color: white; font-size: 1.2rem;">Gauthier Asselin</h3>
+      <p style="margin: 0.2rem 0; color: #aaa; font-size: 0.9rem;">Fondateur & Créateur Vidéo IA</p>
+    </div>
+    <div class="team-card" style="background: #1c1c1c; padding: 1.5rem; border-radius: 1rem; width: 260px; text-align: center; box-shadow: 0 0 20px rgba(74, 144, 226, 0.2);">
+      <img src="https://via.placeholder.com/260x260.png?text=Photo+2" alt="Portrait membre 2" style="width: 100%; border-radius: 1rem; margin-bottom: 1rem;">
+      <h3 style="margin: 0; color: white; font-size: 1.2rem;">Théo Marchal</h3>
+      <p style="margin: 0.2rem 0; color: #aaa; font-size: 0.9rem;">Artiste IA & Motion</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// Scroll et sélection automatique
+const buttons = document.querySelectorAll('.cta');
+const offerSelect = document.getElementById('offer-select');
+
+buttons.forEach(button => {
+  button.addEventListener('click', (e) => {
+    const packName = button.closest('.card').querySelector('.highlight').textContent.trim();
+    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => {
+      offerSelect.value = packName;
+    }, 500);
+  });
+});
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  document.getElementById('progress-bar').style.width = scrollPercent + '%';
+});
+const faders = document.querySelectorAll('.fade-in-section');
+const appearOptions = { threshold: 0.1 };
+const appearOnScroll = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add('visible');
+    observer.unobserve(entry.target);
+  });
+}, appearOptions);
+
+faders.forEach(fader => {
+  appearOnScroll.observe(fader);
+});
+const teamSection = document.querySelector('.team-section');
+appearOnScroll.observe(teamSection);
+</script>
