@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Offres HyperIA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Space Grotesk', sans-serif;
+      background-color: #0e0e0e;
+      color: white;
+      line-height: 1.6;
+    }
+
+    /* Nouveau style pour le header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(14, 14, 14, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 1000;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, #4A90E2, #8A6FF7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+    }
+
+    .logo::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #4A90E2;
+      border-radius: 50%;
+      bottom: 0;
+      right: -10px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 0.5; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(to right, #4A90E2, #8A6FF7);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: #4A90E2;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .contact-button {
+      background: linear-gradient(45deg, #4A90E2, #8A6FF7);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 2rem;
+      border: none;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .contact-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+
+    /* Ajustement pour le contenu principal */
+    .container {
+      margin-top: 100px; /* Pour compenser le header fixe */
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 2rem;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #ffffff;
+      margin-bottom: 2rem;
+      font-weight: 700;
+    }
+    .offers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      justify-content: center;
+    }
+    .card {
+      background: linear-gradient(145deg, #1e1e1e, #161616);
+      border-radius: 1.25rem;
+      padding: 2.5rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3), 0 2px 10px rgba(0,0,0,0.2);
+      transition: all 0.4s ease;
+      max-width: 380px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 30px rgba(74, 144, 226, 0.3), 0 0 15px rgba(138, 111, 247, 0.2);
+    }
+    .card.essentiel:hover,
+    .card.standard:hover,
+    .card.intensif:hover {
+    }
+    .price {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #3EDC81;
+      margin: 1rem 0 1.5rem 0;
+    }
+    .highlight {
+      background-color: rgba(74, 144, 226, 0.1);
+      color: #4A90E2;
+      padding: 0.4rem 0.8rem;
+      border-radius: 1rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      border: 1px solid rgba(74, 144, 226, 0.3);
+    }
+    .cta {
+      background: linear-gradient(to right, #4A90E2, #8A6FF7);
+      border: none;
+      color: white;
+      padding: 0.7rem 1.2rem;
+      border-radius: 0.6rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: fit-content;
+      align-self: center;
+    }
+    .cta:hover {
+      opacity: 0.85;
+      transform: scale(1.05);
+    }
+    details summary {
+      cursor: pointer;
+      font-weight: 500;
+      margin-top: 1.5rem;
+      color: #b0b0b0;
+      list-style: none;
+      padding: 0.5rem 0;
+      transition: color 0.3s ease;
+    }
+    details summary:hover {
+      color: #ffffff;
+    }
+    summary::-webkit-details-marker {
+      display: none;
+    }
+    summary::after {
+      content: "+";
+      font-weight: bold;
+      color: #4A90E2;
+      float: right;
+      transition: transform 0.3s ease;
+    }
+    details[open] summary::after {
+      content: "−";
+      transform: rotate(180deg);
+    }
+    details p {
+      text-align: left;
+      padding: 1rem 0.5rem;
+      background-color: rgba(28, 28, 28, 0.5);
+      border-radius: 0.5rem;
+      line-height: 1.7;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      color: #c0c0c0;
+    }
+    .row-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 3rem;
+      width: 100%;
+    }
+    .flex-showcase {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+    
+      .text-block {
+  text-align: left;
+  align-self: center;
+}
+    .cta-contact {
+    background: linear-gradient(to right, #8A6FF7, #4A90E2);
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.8rem;
+    font-size: 1.1rem;
+    border-radius: 0.6rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(138, 111, 247, 0.3);
+  }
+  .cta-contact:hover {
+    background: #4A90E2;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(74, 144, 226, 0.4);
+  }
+  .team-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(74, 144, 226, 0.4);
+  }
+  .best-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(to right, #4A90E2, #8A6FF7);
+    padding: 0.5rem 1.2rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: white;
+    box-shadow: 0 4px 10px rgba(74, 144, 226, 0.3);
+  }
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.fade-in-section.visible {
+  opacity: 1;
+  transform: none;
+}
+.hero-image {
+  animation: zoomHero 20s ease-in-out infinite alternate;
+}
+@keyframes zoomHero {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); }
+}
+.team-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.team-section.visible {
+  opacity: 1;
+  transform: none;
+}
+@media (max-width: 768px) {
+  .hero-container {
+    flex-direction: column;
+    height: auto;
+  }
+  .hero-text, .hero-image {
+    min-height: auto !important;
+    height: auto !important;
+    width: 100% !important;
+  }
+}
+.hero-text h1 {
+  font-size: 3rem;
+}
+
+@media (max-width: 768px) {
+  .hero-image {
+    background-position: center center;
+    background-size: cover;
+    min-height: 300px;
+    height: 300px;
+    flex: none;
+  }
+  .hero-text {
+    align-items: center !important;
+    text-align: center;
+  }
+  .hero-text h1 {
+    font-size: 2rem !important;
+    text-align: center;
+    text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.7);
+  }
+}
+
+/* Style pour la vidéo en arrière-plan du hero */
+.hero-background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* New style for the header background video */
+/* .header-background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+} */
+</style>
+  <style>
+    .video-frame {
+      width: 100%;
+      max-width: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .phone-style {
+      width: 100%;
+      padding-top: calc(640 / 360 * 100%);
+      position: relative;
+      border: 10px solid #1c1c1c;
+      border-radius: 2rem;
+      background: black;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+      transition: box-shadow 0.4s ease-in-out;
+    }
+    .phone-style video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 2rem;
+    }
+    .phone-style:hover {
+      box-shadow: 0 0 30px 8px rgba(74, 144, 226, 0.3);
+    }
+    @media (min-width: 768px) {
+      .flex-showcase {
+        flex-direction: row-reverse;
+        align-items: center;
+        justify-content: center;
+        gap: 3rem;
+      }
+      .text-block {
+        align-self: center;
+      }
+    }
+  </style>
+<style>
+    .section-separator {
+      border: none;
+      height: 1px;
+      background: linear-gradient(to right, rgba(74, 144, 226, 0.7), rgba(138, 111, 247, 0.7));
+      margin: 5rem auto;
+      width: 70%;
+    }
+    
+    
+</style>
+
+<style>
+  #progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(to right, #4A90E2, #8A6FF7);
+    width: 0%;
+    z-index: 9999;
+    transition: width 0.25s ease-out;
+  }
+</style>
+
+<style>
+  /* Styles pour l'overlay et ajustements hero */
+  .hero-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">HyperIA</div>
+      <nav class="nav-links">
+        <button class="contact-button">Nous contacter</button>
+      </nav>
+    </div>
+  </header>
+
+<div id="progress-bar"></div>
+
+<!-- Hero Section -->
+<div class="fade-in-section">
+<div class="hero-container" style="display: flex; flex-wrap: wrap; height: 80vh; align-items: center; justify-content: center; background: none; position: relative; overflow: hidden; z-index: 0;">
+  <!-- L'overlay sera ajouté via CSS sur hero-container::before -->
+  <video autoplay loop muted playsinline class="hero-background-video">
+    <source src="assets/videos/Videohero.mp4" type="video/mp4">
+    <source src="assets/videos/videohero.webm.webm" type="video/webm">
+    Votre navigateur ne supporte pas la balise vidéo.
+  </video>
+  <div class="hero-text" style="flex: 1; min-width: 300px; padding: 2rem; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; position: relative; z-index: 2;">
+    <h1 style="font-size: 3rem; line-height: 1.2; margin-bottom: 1rem; color: #ffffff; text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);">HyperIA,<br>création vidéo IA sans limite</h1>
+    <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });" class="cta-contact" style="margin-top: 1.5rem;">Nous contacter</button>
+  </div>
+  <div class="hero-image" style="flex: 1; min-width: 300px; height: 100%; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('assets/images/hero-background.jpg') center/cover no-repeat; border-radius: 0; position: relative; z-index: -1; display: none;"></div>
+</div>
+</div>
+
+<!-- Section Adieu les contraintes ! - Remplacée par IA Générative -->
+<div class="container fade-in-section" style="margin-top: 4rem;">
+  <h1 style="font-size: 2.3rem; color: #ffffff;">Explorez les Possibilités de l'IA Générative</h1>
+  <p style="color: #aaa; margin-bottom: 3rem; font-size: 1.1rem;">Voyez le même concept prendre vie dans des environnements radicalement différents grâce à l'IA.</p>
+  
+  <div class="gen-ai-video-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; justify-items: center;">
+    
+    <!-- Vidéo 1 -->
+    <div class="video-frame">
+      <div class="phone-style">
+        <video autoplay loop muted playsinline>
+          <source src="assets/videos/carousel/Professional_Mode_A_hand_pours_thick_yellow_sauce__chf3_prob4.mp4" type="video/mp4">
+          Votre navigateur ne supporte pas la balise vidéo.
+        </video>
+      </div>
+      <p style="color: #ccc; font-size: 0.95rem; margin-top: 1rem;">Environnement #1</p>
+    </div>
+    
+    <!-- Vidéo 2 -->
+    <div class="video-frame">
+      <div class="phone-style">
+        <video autoplay loop muted playsinline>
+          <source src="assets/videos/carousel/Professional_Mode_A_hand_sprinkles_Parmesan_onto_a.mp4" type="video/mp4">
+          Votre navigateur ne supporte pas la balise vidéo.
+        </video>
+      </div>
+      <p style="color: #ccc; font-size: 0.95rem; margin-top: 1rem;">Environnement #2</p>
+    </div>
+
+    <!-- Vidéo 3 -->
+    <div class="video-frame">
+      <div class="phone-style">
+        <video autoplay loop muted playsinline>
+          <source src="assets/videos/carousel/Professional_Mode_A_person_pours_golden_sauce_from.mp4" type="video/mp4">
+          Votre navigateur ne supporte pas la balise vidéo.
+        </video>
+      </div>
+      <p style="color: #ccc; font-size: 0.95rem; margin-top: 1rem;">Environnement #3</p>
+    </div>
+
+    <!-- Vidéo 4 -->
+    <div class="video-frame">
+      <div class="phone-style">
+        <video autoplay loop muted playsinline>
+          <source src="assets/videos/carousel/Professional_Mode_The_person_pours_champagne_into_.mp4" type="video/mp4">
+          Votre navigateur ne supporte pas la balise vidéo.
+        </video>
+      </div>
+      <p style="color: #ccc; font-size: 0.95rem; margin-top: 1rem;">Environnement #4</p>
+    </div>
+  </div>
+</div>
+
+<hr class="section-separator">
+
+<!-- Section Nos Offres -->
+  <div class="container fade-in-section">
+    <h1>Nos Offres</h1>
+    <div class="offers">
+  <div class="row-wrapper">
+    <div class="card essentiel">
+      <div class="highlight">Essentiel</div>
+      <h2>490 € TTC</h2>
+      <p>Contenu rapide, efficace et prêt à diffuser.</p>
+      <button class="cta">Choisir ce pack</button>
+      <details>
+        <summary>Plus de détails</summary>
+        <p>
+          1 concept créatif<br>
+          1 moodboard express<br>
+          1 vidéo verticale (15-30s)<br>
+          1 visuel statique<br>
+          2 itérations<br>
+          Formats 9:16 + carré
+        </p>
+      </details>
+    </div>
+    <div class="card standard">
+  <div class="best-badge">⭐ Populaire</div>
+      <div class="highlight">Standard</div>
+      <h2>990 € TTC</h2>
+      <p>Présence régulière sur les réseaux pendant plusieurs jours.</p>
+      <button class="cta">Choisir ce pack</button>
+      <details>
+        <summary>Plus de détails</summary>
+        <p>
+          2 concepts + moodboard<br>
+          Prompt IA multi-essais<br>
+          2 vidéos courtes<br>
+          2 visuels ads/post<br>
+          Variante texte + 3 itérations
+        </p>
+      </details>
+    </div>
+  </div>
+  <div style="margin-top: 2rem; display: flex; justify-content: center;">
+    <div class="card intensif">
+      <div class="highlight">Intensif</div>
+      <h2>1490 € TTC</h2>
+      <p>Campagne complète avec approche storytelling & multi-formats.</p>
+      <button class="cta">Choisir ce pack</button>
+      <details>
+        <summary>Plus de détails</summary>
+        <p>
+          Atelier stratégique + 3 concepts<br>
+          Moodboard & voice-over<br>
+          3 vidéos + teaser<br>
+          3 visuels + sous-titrage<br>
+          Script post + 5 itérations<br>
+          Formats multiples prêts à l'emploi
+        </p>
+      </details>
+    </div>
+  </div>
+</div>
+<hr class="section-separator" style="margin: 2rem auto;">
+  </div>
+
+
+<div class="container fade-in-section" id="contact">
+  <h1 style="font-size: 2.3rem; color: #ffffff;">Contactez-nous</h1>
+  <form id="contact-form" style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 550px; margin: 2rem auto 0 auto; background: #1a1a1a; padding: 2.5rem; border-radius: 1rem; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); border: 1px solid rgba(255,255,255,0.05);">
+    <input type="text" name="name" placeholder="Votre nom" required style="padding: 0.9rem 1.1rem; background: #222; border: 1px solid #333; border-radius: 0.5rem; color: white; font-size: 1rem; transition: border-color 0.3s ease, box-shadow 0.3s ease;">
+    <input type="email" name="email" placeholder="Votre email" required style="padding: 0.9rem 1.1rem; background: #222; border: 1px solid #333; border-radius: 0.5rem; color: white; font-size: 1rem; transition: border-color 0.3s ease, box-shadow 0.3s ease;">
+    <select id="offer-select" name="offer" required style="padding: 0.9rem 1.1rem; background: #222; border: 1px solid #333; border-radius: 0.5rem; color: white; font-size: 1rem; appearance: none; background-image: url('data:image/svg+xml;utf8,<svg fill=\'%234A90E2\' height=\'24\' viewBox=\'0 0 24 24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M7 10l5 5 5-5z\'/></svg>'); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1.5rem; transition: border-color 0.3s ease, box-shadow 0.3s ease;">
+      <option value="">Choisissez une offre</option>
+      <option value="Essentiel">Essentiel</option>
+      <option value="Standard">Standard</option>
+      <option value="Intensif">Intensif</option>
+      <option value="Autre">Autre</option>
+    </select>
+    <textarea name="message" placeholder="Votre message" rows="5" required style="padding: 0.9rem 1.1rem; background: #222; border: 1px solid #333; border-radius: 0.5rem; color: white; font-size: 1rem; transition: border-color 0.3s ease, box-shadow 0.3s ease; line-height: 1.6;"></textarea>
+    <button type="submit" class="cta-contact" style="margin-top: 1rem;">Envoyer</button>
+  </form>
+</div>
+
+<hr class="section-separator">
+<div class="container fade-in-section" style="margin-top: 4rem;">
+  <h1 style="font-size: 2.3rem; color: #ffffff;">Notre expertise</h1>
+  <p style="color: #aaa; margin-bottom: 3rem; font-size: 1.1rem;">Notre équipe est issue d'univers créatifs et exigeants.</p>
+  <div class="logo-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 3rem; align-items: center; justify-items: center;">
+    <img src="assets/images/logos expertise/Dior_Logo.svg.png" alt="Dior" class="client-logo">
+    <img src="assets/images/logos expertise/Van-Cleef-Arpels-logo.png" alt="Van Cleef & Arpels" class="client-logo">
+    <img src="assets/images/logos expertise/Orange_logo.svg.webp" alt="Orange" class="client-logo">
+    <img src="assets/images/logos expertise/mykare.png" alt="MyKare" class="client-logo">
+    <img src="https://via.placeholder.com/120x60.png?text=Logo+5" alt="Logo 5" class="client-logo">
+    <img src="https://via.placeholder.com/120x60.png?text=Logo+6" alt="Logo 6" class="client-logo">
+  </div>
+</div>
+
+<hr class="section-separator">
+<div class="container fade-in-section" style="margin-top: 4rem;">
+<h1 style="font-size: 2.3rem; color: #ffffff;">Notre équipe</h1>
+  <div class="team-section" style="display: flex; flex-wrap: wrap; gap: 2.5rem; justify-content: center; margin-top: 3rem;">
+    <div class="team-card" style="background: #1a1a1a; padding: 2rem; border-radius: 1rem; width: 280px; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05);">
+      <img src="assets/images/gauthier-asselin.jpg" alt="Gauthier Asselin" style="width: 100%; max-width: 180px; border-radius: 50%; margin-bottom: 1.5rem; border: 3px solid rgba(74,144,226,0.5);">
+      <h3 style="margin: 0.5rem 0; color: white; font-size: 1.3rem;">Gauthier Asselin</h3>
+      <p style="margin: 0.2rem 0; color: #aaa; font-size: 0.95rem;">Fondateur & Créateur Vidéo IA</p>
+    </div>
+    <div class="team-card" style="background: #1a1a1a; padding: 2rem; border-radius: 1rem; width: 280px; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05);">
+      <img src="assets/images/jade-libouban.jpg" alt="Jade Libouban" style="width: 100%; max-width: 180px; border-radius: 50%; margin-bottom: 1.5rem; border: 3px solid rgba(138,111,247,0.5);">
+      <h3 style="margin: 0.5rem 0; color: white; font-size: 1.3rem;">Jade Libouban</h3>
+      <p style="margin: 0.2rem 0; color: #aaa; font-size: 0.95rem;">Fondatrice & Artiste IA & Motion</p>
+    </div>
+  </div>
+</div>
+
+<footer class="footer" style="margin-top: 5rem; padding: 3rem 2rem; background-color: #111; text-align: center; border-top: 1px solid rgba(255,255,255,0.05);">
+  <p style="color: #888; font-size: 0.9rem; margin: 0;">&copy; 2024 HyperIA. Tous droits réservés.</p>
+  <p style="color: #666; font-size: 0.8rem; margin-top: 0.5rem;">Propulsé par l'innovation et la créativité IA.</p>
+</footer>
+
+<script>
+// Scroll et sélection automatique
+const buttons = document.querySelectorAll('.cta');
+const offerSelect = document.getElementById('offer-select');
+
+buttons.forEach(button => {
+  button.addEventListener('click', (e) => {
+    const packName = button.closest('.card').querySelector('.highlight').textContent.trim();
+    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => {
+      offerSelect.value = packName;
+    }, 500);
+  });
+});
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  document.getElementById('progress-bar').style.width = scrollPercent + '%';
+});
+const faders = document.querySelectorAll('.fade-in-section');
+const appearOptions = { threshold: 0.1 };
+const appearOnScroll = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add('visible');
+    observer.unobserve(entry.target);
+  });
+}, appearOptions);
+
+faders.forEach(fader => {
+  appearOnScroll.observe(fader);
+});
+const teamSection = document.querySelector('.team-section');
+appearOnScroll.observe(teamSection);
+</script>
+
+<style>
+  /* Styles pour les inputs et textarea au focus */
+  input[type="text"]:focus, 
+  input[type="email"]:focus, 
+  select:focus, 
+  textarea:focus {
+    border-color: #4A90E2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3);
+    outline: none;
+  }
+
+  /* Styles pour les logos clients */
+  .client-logo {
+    max-width: 120px;
+    height: auto;
+    opacity: 0.6;
+    filter: grayscale(100%);
+    transition: all 0.4s ease;
+  }
+  .client-logo:hover {
+    opacity: 1;
+    filter: grayscale(0%);
+    transform: scale(1.1);
+  }
+
+  /* Style pour les team cards */
+  .team-card:hover {
+    /* L'effet est déjà géré par la classe .card et son :hover via le premier edit_file */
+    /* Pour un effet spécifique aux team cards, on pourrait ajouter : */
+    /* border-color: rgba(74, 144, 226, 0.5); */
+    /* transform: translateY(-8px) scale(1.03); */ /* ajusté pour être différent des cards d'offres */
+  }
+
+</style>
+</body>
+</html>
