@@ -127,10 +127,6 @@
         gap: 1rem;
       }
 
-      .video-frame {
-        max-width: 110px;
-      }
-
       .contact-button {
         display: none;
       }
@@ -142,8 +138,8 @@
 
       .offers,
       .team-section,
-      .logo-grid,
-      .gen-ai-video-grid {
+      .logo-grid
+       {
         justify-content: center;
         gap: 1.5rem;
       }
@@ -375,24 +371,19 @@
   .hero-container {
     flex-direction: column;
     height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
   .hero-text, .hero-image {
     min-height: auto !important;
     height: auto !important;
     width: 100% !important;
-  }
-}
-.hero-text h1 {
-  font-size: 3rem;
-}
-
-@media (max-width: 768px) {
-  .hero-image {
-    background-position: center center;
-    background-size: cover;
-    min-height: 300px;
-    height: 300px;
-    flex: none;
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
   }
   .hero-text {
     align-items: center !important;
@@ -403,6 +394,37 @@
     text-align: center;
     text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.7);
   }
+  .hero-background-video {
+    object-position: center;
+    position: relative;
+    width: 100%;
+    height: auto;
+    z-index: 0;
+  }
+  .hero-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+  .gen-ai-video-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+  .video-frame {
+    max-width: none;
+    width: 100%;
+  }
+}
+.hero-text h1 {
+  font-size: 3rem;
+  text-align: center;
 }
 
 /* Style pour la vidéo en arrière-plan du hero */
@@ -426,11 +448,11 @@
   object-fit: cover;
   z-index: 0;
 } */
-</style>
+  </style>
   <style>
     .video-frame {
       width: 100%;
-      max-width: 300px;
+      max-width: 250px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -507,6 +529,54 @@
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1;
   }
+  
+  .hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 800px;
+    box-sizing: border-box;
+    text-align: center;
+    z-index: 2;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .hero-text h1 {
+    font-size: 3rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
+    text-align: center;
+  }
+
+</style>
+<style>
+  .gen-ai-video-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 768px) {
+    .gen-ai-video-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      padding: 0 1rem;
+    }
+    .video-frame {
+      max-width: none;
+      width: 100%;
+    }
+  }
 </style>
 </head>
 <body>
@@ -523,14 +593,14 @@
 
 <!-- Hero Section -->
 <div class="fade-in-section">
-<div class="hero-container" style="display: flex; flex-wrap: wrap; height: 80vh; align-items: center; justify-content: center; background: none; position: relative; overflow: hidden; z-index: 0;">
+<div class="hero-container" style="height: 80vh; background: none; position: relative; overflow: hidden; z-index: 0;">
   <!-- L'overlay sera ajouté via CSS sur hero-container::before -->
   <video autoplay loop muted playsinline class="hero-background-video">
     <source src="assets/videos/Videohero.mp4" type="video/mp4">
     <source src="assets/videos/videohero.webm.webm" type="video/webm">
     Votre navigateur ne supporte pas la balise vidéo.
   </video>
-  <div class="hero-text" style="flex: 1; min-width: 300px; padding: 2rem; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; position: relative; z-index: 2;">
+  <div class="hero-text">
     <h1 style="font-size: 3rem; line-height: 1.2; margin-bottom: 1rem; color: #ffffff; text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);">HyperIA,<br>création vidéo IA sans limite</h1>
     <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });" class="cta-contact" style="margin-top: 1.5rem;">Nous contacter</button>
   </div>
@@ -543,7 +613,7 @@
   <h1 style="font-size: 2.3rem; color: #ffffff;">Explorez les Possibilités de l'IA Générative</h1>
   <p style="color: #aaa; margin-bottom: 3rem; font-size: 1.1rem;">Voyez le même concept prendre vie dans des environnements radicalement différents grâce à l'IA.</p>
   
-  <div class="gen-ai-video-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; justify-items: center;">
+  <div class="gen-ai-video-grid">
     
     <!-- Vidéo 1 -->
     <div class="video-frame">
@@ -659,7 +729,7 @@
 
 <div class="container fade-in-section" id="contact">
   <h1 style="font-size: 2.3rem; color: #ffffff;">Contactez-nous</h1>
-  <form id="contact-form" style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 550px; margin: 2rem auto 0 auto; background: #1a1a1a; padding: 2.5rem; border-radius: 1rem; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); border: 1px solid rgba(255,255,255,0.05);">
+  <form id="contact-form" action="https://formspree.io/f/myzwobvn" method="POST" style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 550px; margin: 2rem auto 0 auto; background: #1a1a1a; padding: 2.5rem; border-radius: 1rem; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); border: 1px solid rgba(255,255,255,0.05);">
     <input type="text" name="name" placeholder="Votre nom" required style="padding: 0.9rem 1.1rem; background: #222; border: 1px solid #333; border-radius: 0.5rem; color: white; font-size: 1rem; transition: border-color 0.3s ease, box-shadow 0.3s ease;">
     <input type="email" name="email" placeholder="Votre email" required style="padding: 0.9rem 1.1rem; background: #222; border: 1px solid #333; border-radius: 0.5rem; color: white; font-size: 1rem; transition: border-color 0.3s ease, box-shadow 0.3s ease;">
     <select id="offer-select" name="offer" required style="padding: 0.9rem 1.1rem; background: #222; border: 1px solid #333; border-radius: 0.5rem; color: white; font-size: 1rem; appearance: none; background-image: url('data:image/svg+xml;utf8,<svg fill=\'%234A90E2\' height=\'24\' viewBox=\'0 0 24 24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M7 10l5 5 5-5z\'/></svg>'); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1.5rem; transition: border-color 0.3s ease, box-shadow 0.3s ease;">
@@ -683,8 +753,6 @@
     <img src="assets/images/logos expertise/Van-Cleef-Arpels-logo.png" alt="Van Cleef & Arpels" class="client-logo">
     <img src="assets/images/logos expertise/Orange_logo.svg.webp" alt="Orange" class="client-logo">
     <img src="assets/images/logos expertise/mykare.png" alt="MyKare" class="client-logo">
-    <img src="https://via.placeholder.com/120x60.png?text=Logo+5" alt="Logo 5" class="client-logo">
-    <img src="https://via.placeholder.com/120x60.png?text=Logo+6" alt="Logo 6" class="client-logo">
   </div>
 </div>
 
