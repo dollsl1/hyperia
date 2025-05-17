@@ -1,0 +1,260 @@
+body {
+  margin: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  background-color: #0e0e0e;
+  color: white;
+  line-height: 1.6;
+  font-size: 16px; /* Base font size */
+}
+
+/* Nouveau style pour le header */
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5rem; /* Légèrement ajusté pour les petits écrans */
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem; /* Padding conservé pour mobile */
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%; /* Les liens prennent toute la largeur */
+    align-items: center; /* Centrer les liens empilés */
+  }
+  .nav-link {
+    padding: 0.5rem 0;
+    width: fit-content; /* Les liens reprennent leur largeur */
+  }
+  .video-frame {
+    max-width: 250px; /* Réduit la largeur max du cadre vidéo sur mobile */
+  }
+}
+
+/* Ajustement pour le contenu principal */
+.container {
+  margin-top: 100px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2rem 1.5rem; /* Padding horizontal ajusté */
+  text-align: center;
+}
+h1 {
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  /* Ajustement de la taille sur les petits écrans */
+  font-size: clamp(2rem, 5vw, 2.5rem); /* Taille fluide entre 2rem et 2.5rem */
+}
+.offers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem; /* Réduit légèrement le gap sur mobile */
+  justify-content: center;
+}
+.card {
+  max-width: 350px; /* Légèrement réduit pour permettre 3 cartes sur certaines tailles */
+  width: 100%;
+  padding: 2rem; /* Réduit légèrement le padding interne des cartes */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3), 0 2px 10px rgba(0,0,0,0.2);
+  transition: all 0.4s ease;
+  /* max-width: 380px; */ /* Déplacé ci-dessus et ajusté */
+  /* width: 100%; */ /* Déplacé ci-dessus */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(74, 144, 226, 0.3), 0 0 15px rgba(138, 111, 247, 0.2);
+}
+summary::after {
+  content: "+";
+  font-weight: bold;
+  color: #4A90E2;
+  float: right;
+  transition: transform 0.3s ease;
+  margin-left: 0.5rem; /* Ajout d'un petit espace */
+}
+details[open] summary::after {
+  content: "−";
+  transform: rotate(180deg);
+}
+details p {
+  text-align: left;
+  padding: 1rem; /* Padding interne ajusté */
+  background-color: rgba(28, 28, 28, 0.5);
+  border-radius: 0.5rem;
+  line-height: 1.7;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  color: #c0c0c0;
+}
+.row-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem; /* Ajusté pour correspondre à .offers */
+  width: 100%;
+}
+
+/* Style pour le cadre vidéo et le téléphone */
+.video-frame {
+  width: 100%;
+  max-width: 300px; /* Ajusté pour la grille de 4, vous pouvez affiner */
+  /* min-height: 640px; Cette hauteur peut être trop grande pour 4 vidéos côte à côte */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.phone-style {
+  width: 100%;
+  padding-top: calc(640 / 360 * 100%); /* Garde le ratio 360x640 (approx 1.77:1 portrait) */
+  position: relative;
+  border: 10px solid #1c1c1c;
+  border-radius: 2rem;
+  background: black;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  transition: box-shadow 0.4s ease-in-out;
+}
+.phone-style video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 2rem;
+}
+
+.phone-style:hover {
+  box-shadow: 0 0 30px 8px rgba(74, 144, 226, 0.3);
+}
+/* Règle précédente .phone-style iframe supprimée car on utilise des balises video */
+
+/* Nouvelle grille pour les vidéos IA Générative */
+.gen-ai-video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Ajusté minmax pour la grille */
+  gap: 2rem; /* Ajusté le gap */
+  justify-items: center;
+  margin-top: 3rem; /* Ajout de marge si nécessaire */
+}
+
+@media (min-width: 768px) {
+  .flex-showcase {
+    /* Cette règle n'est plus pertinente pour la nouvelle structure de grille */
+    /* flex-direction: row-reverse; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    /* gap: 3rem; */
+  }
+  .text-block {
+    /* Cette règle n'est plus pertinente pour la nouvelle structure */
+    /* align-self: center; */
+  }
+}
+
+<style>
+/* Style pour le cadre vidéo et le téléphone */
+.video-frame {
+  width: 100%;
+  max-width: 300px; /* Ajusté pour la grille de 4, vous pouvez affiner */
+  /* min-height: 640px; Cette hauteur peut être trop grande pour 4 vidéos côte à côte */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.phone-style {
+  width: 100%;
+  padding-top: calc(640 / 360 * 100%); /* Garde le ratio 360x640 (approx 1.77:1 portrait) */
+  position: relative;
+  border: 10px solid #1c1c1c;
+  border-radius: 2rem;
+  background: black;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  transition: box-shadow 0.4s ease-in-out;
+}
+.phone-style video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 2rem;
+}
+
+.phone-style:hover {
+  box-shadow: 0 0 30px 8px rgba(74, 144, 226, 0.3);
+}
+/* Règle précédente .phone-style iframe supprimée car on utilise des balises video */
+
+/* Nouvelle grille pour les vidéos IA Générative */
+.gen-ai-video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Ajusté minmax pour la grille */
+  gap: 2rem; /* Ajusté le gap */
+  justify-items: center;
+  margin-top: 3rem; /* Ajout de marge si nécessaire */
+}
+
+@media (min-width: 768px) {
+  .flex-showcase {
+    /* Cette règle n'est plus pertinente pour la nouvelle structure de grille */
+    /* flex-direction: row-reverse; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    /* gap: 3rem; */
+  }
+  .text-block {
+    /* Cette règle n'est plus pertinente pour la nouvelle structure */
+    /* align-self: center; */
+  }
+}
+</style>
+
+<div class="container fade-in-section" id="contact">
+  <h1 style="font-size: 2.3rem; color: #ffffff;">Contactez-nous</h1>
+  <form id="contact-form" style="display: flex; flex-direction: column; gap: 1rem; /* Réduit le gap */ max-width: 500px; /* Réduit légèrement la largeur max du formulaire */ margin: 2rem auto; /* Ajuste la marge */ background: #1a1a1a; padding: 2rem; /* Réduit le padding */ border-radius: 0.75rem; /* Adoucit les arrondis */ box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); border: 1px solid rgba(255,255,255,0.08); /* Bordure plus subtile */">
+    <input type="text" name="name" placeholder="Votre nom" required style="padding: 0.8rem 1rem; /* Padding ajusté */ background: #222; border: 1px solid #333; border-radius: 0.4rem; /* Arrondis ajustés */ color: white; font-size: 1rem; transition: border-color 0.3s ease, box-shadow 0.3s ease;">
+    <input type="email" name="email" placeholder="Votre email" required style="padding: 0.8rem 1rem; /* Padding ajusté */ background: #222; border: 1px solid #333; border-radius: 0.4rem; /* Arrondis ajustés */ color: white; font-size: 1rem; transition: border-color 0.3s ease, box-shadow 0.3s ease;">
+    <select id="offer-select" name="offer" required style="padding: 0.8rem 1rem; /* Padding ajusté */ background: #222; border: 1px solid #333; border-radius: 0.4rem; /* Arrondis ajustés */ color: white; font-size: 1rem; appearance: none; background-image: url('data:image/svg+xml;utf8,<svg fill=\'%234A90E2\' height=\'24\' viewBox=\'0 0 24 24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M7 10l5 5 5-5z\'/></svg>'); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1.5rem; transition: border-color 0.3s ease, box-shadow 0.3s ease;">
+      <option value="">Choisissez une offre</option>
+    <textarea name="message" placeholder="Votre message" rows="4" /* Réduit le nombre de lignes par défaut */ required style="padding: 0.8rem 1rem; /* Padding ajusté */ background: #222; border: 1px solid #333; border-radius: 0.4rem; /* Arrondis ajustés */ color: white; font-size: 1rem; transition: border-color 0.3s ease, box-shadow 0.3s ease; line-height: 1.6;"></textarea>
+    <button type="submit" class="cta-contact" style="margin-top: 1.5rem; /* Marge ajustée */">Envoyer</button>
+  </form>
+</div>
+
+<hr class="section-separator">
+<div class="container fade-in-section" style="margin-top: 4rem;">
+  <h1 style="font-size: 2.3rem; color: #ffffff;">Notre expertise</h1>
+  <p style="color: #aaa; margin-bottom: 3rem; font-size: 1.1rem;">Notre équipe est issue d'univers créatifs et exigeants.</p>
+  <div class="logo-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Ajusté minmax pour les logos */ gap: 2rem; /* Réduit le gap */ align-items: center; justify-items: center;">
+</div>
+
+<hr class="section-separator">
+<div class="container fade-in-section" style="margin-top: 4rem;">
+<h1 style="font-size: 2.3rem; color: #ffffff;">Notre équipe</h1>
+  <div class="team-section" style="display: flex; flex-wrap: wrap; gap: 2rem; /* Réduit le gap */ justify-content: center; margin-top: 3rem;">
+</div>
+
+<footer class="footer" style="margin-top: 5rem; padding: 2rem 1.5rem; /* Padding ajusté */ background-color: #111; text-align: center; border-top: 1px solid rgba(255,255,255,0.05);">
+  /* Styles pour les logos clients */
+  .client-logo {
+    max-width: 140px; /* Augmenté légèrement */
+    height: auto;
+  }
+</footer>
+</body>
+</html> 
