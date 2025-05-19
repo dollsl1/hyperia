@@ -613,16 +613,16 @@
 
 <!-- Section Adieu les contraintes ! - Remplacée par IA Générative -->
 <div class="container fade-in-section" style="margin-top: 4rem;">
-  <h1 style="font-size: 2.3rem; color: #ffffff;">Un même concept, une infinité de déclinaisons</h1>
-  <p style="color: #aaa; margin-bottom: 3rem; font-size: 1.1rem;">Voyez comment notre IA s'adapte à tous les styles, toutes les ambiances et tous les univers pour répondre à vos besoins, quels qu'ils soient.</p>
+  <h1 style="font-size: 2.3rem; color: #ffffff;">Des possibilités infinies</h1>
+  <p style="color: #aaa; margin-bottom: 3rem; font-size: 1.1rem;">Profitez de nos univers adaptés à vos besoins</p>
   
   <div class="gen-ai-video-grid">
     
     <!-- Vidéo 1 -->
     <div class="video-frame">
       <div class="phone-style">
-        <video autoplay loop muted playsinline>
-          <source src="assets/videos/carousel/cheesemelting1.mp4" type="video/mp4">
+        <video loop muted playsinline class="lazy-video">
+          <source data-src="assets/videos/carousel/cheesemelting1.mp4" type="video/mp4">
           Votre navigateur ne supporte pas la balise vidéo.
         </video>
       </div>
@@ -631,8 +631,8 @@
     <!-- Vidéo 2 -->
     <div class="video-frame">
       <div class="phone-style">
-        <video autoplay loop muted playsinline>
-          <source src="assets/videos/carousel/pink product.mp4" type="video/mp4">
+        <video loop muted playsinline class="lazy-video">
+          <source data-src="assets/videos/carousel/pink product.mp4" type="video/mp4">
           Votre navigateur ne supporte pas la balise vidéo.
         </video>
       </div>
@@ -641,8 +641,8 @@
     <!-- Vidéo 3 -->
     <div class="video-frame">
       <div class="phone-style">
-        <video autoplay loop muted playsinline>
-          <source src="assets/videos/carousel/bottlefloating.mp4" type="video/mp4">
+        <video loop muted playsinline class="lazy-video">
+          <source data-src="assets/videos/carousel/bottlefloating.mp4" type="video/mp4">
           Votre navigateur ne supporte pas la balise vidéo.
         </video>
       </div>
@@ -651,8 +651,8 @@
     <!-- Vidéo 4 -->
     <div class="video-frame">
       <div class="phone-style">
-        <video autoplay loop muted playsinline>
-          <source src="assets/videos/carousel/perfumeforest.mp4" type="video/mp4">
+        <video loop muted playsinline class="lazy-video">
+          <source data-src="assets/videos/carousel/perfumeforest.mp4" type="video/mp4">
           Votre navigateur ne supporte pas la balise vidéo.
         </video>
       </div>
@@ -935,6 +935,31 @@ appearOnScroll.observe(teamSection);
         formMessages.textContent = 'Oups! Une erreur de réseau est survenue.';
         formMessages.style.color = '#E53E3E';
       });
+    });
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const lazyVideos = document.querySelectorAll('video.lazy-video');
+
+    const videoObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const video = entry.target;
+          const sources = video.querySelectorAll('source[data-src]');
+          sources.forEach(source => {
+            source.src = source.dataset.src;
+          });
+          video.load(); // Charge la vidéo une fois que src est défini
+          video.play(); // Lance la lecture de la vidéo
+          video.classList.remove('lazy-video'); // Optionnel: retirer la classe après chargement
+          observer.unobserve(video); // Arrête d'observer cette vidéo
+        }
+      });
+    });
+
+    lazyVideos.forEach(video => {
+      videoObserver.observe(video);
     });
   });
 </script>
