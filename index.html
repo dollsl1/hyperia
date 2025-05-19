@@ -739,7 +739,7 @@
       <option value="Intensif">Intensif</option>
       <option value="Autre">Autre</option>
     </select>
-    <textarea name="message" placeholder="Votre message" rows="5" required style="padding: 0.9rem 1.1rem; background: #222; border: 1px solid #333; border-radius: 0.5rem; color: white; font-size: 1rem; transition: border-color 0.3s ease, box-shadow 0.3s ease; line-height: 1.6;"></textarea>
+    <textarea name="message" placeholder="Votre message" rows="5" required style="padding: 0.9rem 1.1rem; background: #222; border: 1px solid #333; border-radius: 0.5rem; color: white; font-size: 1rem; transition: border-color 0.3s ease, box-shadow 0.3s ease; line-height: 1.6; resize: none;"></textarea>
     <button type="submit" class="cta-contact" style="margin-top: 1rem;">Envoyer</button>
   </form>
   <div id="form-messages" style="margin-top: 1.5rem; color: #3EDC81; font-weight: 500; text-align: center;"></div>
@@ -751,9 +751,10 @@
   <p style="color: #aaa; margin-bottom: 3rem; font-size: 1.1rem;">Notre équipe est issue d'univers créatifs et exigeants.</p>
   <div class="logo-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 3rem; align-items: center; justify-items: center;">
     <img src="assets/images/logos expertise/Dior_Logo.svg.png" alt="Dior" class="client-logo">
-    <img src="assets/images/logos expertise/Van-Cleef-Arpels-logo.png" alt="Van Cleef & Arpels" class="client-logo">
+    <img src="assets/images/logos expertise/Van-Cleef-Arpels-logo.png" alt="Van Cleef & Arpels" class="client-logo van-cleef-logo">
+    <img src="assets/images/logos expertise/blissim.png" alt="Blissim" class="client-logo blissim-logo">
     <img src="assets/images/logos expertise/Orange_logo.svg.webp" alt="Orange" class="client-logo">
-    <img src="assets/images/logos expertise/mykare.png" alt="MyKare" class="client-logo">
+    <img src="assets/images/logos expertise/mykare.png" alt="MyKare" class="client-logo mykare-logo">
   </div>
 </div>
 
@@ -762,12 +763,12 @@
 <h1 style="font-size: 2.3rem; color: #ffffff;">Notre équipe</h1>
   <div class="team-section" style="display: flex; flex-wrap: wrap; gap: 2.5rem; justify-content: center; margin-top: 3rem;">
     <div class="team-card" style="background: #1a1a1a; padding: 2rem; border-radius: 1rem; width: 280px; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05);">
-      <img src="assets/images/gauthier-asselin.jpg" alt="Gauthier Asselin" style="width: 100%; max-width: 180px; border-radius: 50%; margin-bottom: 1.5rem; border: 3px solid rgba(74,144,226,0.5);">
+      <img src="assets/images/gauthier-asselin.jpg" alt="Gauthier Asselin" style="width: 100%; max-width: 180px; border-radius: 50%; margin-bottom: 1.5rem; border: 3px solid rgba(74,144,226,0.5); height: 180px; object-fit: cover;">
       <h3 style="margin: 0.5rem 0; color: white; font-size: 1.3rem;">Gauthier Asselin</h3>
       <p style="margin: 0.2rem 0; color: #aaa; font-size: 0.95rem;">Fondateur & Créateur Vidéo IA</p>
     </div>
     <div class="team-card" style="background: #1a1a1a; padding: 2rem; border-radius: 1rem; width: 280px; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05);">
-      <img src="assets/images/jade-libouban.jpg" alt="Jade Libouban" style="width: 100%; max-width: 180px; border-radius: 50%; margin-bottom: 1.5rem; border: 3px solid rgba(138,111,247,0.5);">
+      <img src="assets/images/jade-libouban.jpeg" alt="Jade Libouban" style="width: 100%; max-width: 180px; border-radius: 50%; margin-bottom: 1.5rem; border: 3px solid rgba(138,111,247,0.5); height: 180px; object-fit: cover;">
       <h3 style="margin: 0.5rem 0; color: white; font-size: 1.3rem;">Jade Libouban</h3>
       <p style="margin: 0.2rem 0; color: #aaa; font-size: 0.95rem;">Fondatrice & Artiste IA & Motion</p>
     </div>
@@ -847,6 +848,44 @@ appearOnScroll.observe(teamSection);
     /* Pour un effet spécifique aux team cards, on pourrait ajouter : */
     /* border-color: rgba(74, 144, 226, 0.5); */
     /* transform: translateY(-8px) scale(1.03); */ /* ajusté pour être différent des cards d'offres */
+  }
+
+  .blissim-logo {
+    opacity: 0.8; /* Rendre le logo plus visible par défaut */
+    filter: none; /* Supprimer le filtre niveaux de gris */
+  }
+
+  .blissim-logo:hover {
+    filter: invert(100%); /* Inverse les couleurs pour le rendre blanc */
+    opacity: 1; /* S'assurer qu'il est complètement opaque */
+  }
+
+  .van-cleef-logo {
+    transform: scale(1.4); /* Agrandir le logo de 1.4 fois */
+    /* S'assurer qu'il conserve les styles par défaut de .client-logo mais en étant plus grand */
+    opacity: 0.6; /* Conserver l'opacité par défaut des logos clients */
+    filter: grayscale(100%); /* Conserver le filtre niveaux de gris par défaut */
+  }
+
+  .van-cleef-logo:hover {
+    /* Appliquer les styles de survol généraux en plus de l'agrandissement */
+    opacity: 1; /* Augmenter l'opacité au survol */
+    filter: grayscale(0%); /* Supprimer le filtre niveaux de gris au survol */
+    transform: scale(1.4) scale(1.1); /* Conserver l'agrandissement et ajouter l'effet de survol général */
+    /* Ou juste transform: scale(1.4) si l'effet de survol général ne doit pas agrandir davantage */
+  }
+
+  .mykare-logo {
+    transform: scale(1.4); /* Agrandir le logo de 1.4 fois */
+    opacity: 0.6; /* Conserver l'opacité par défaut des logos clients */
+    filter: grayscale(100%); /* Conserver le filtre niveaux de gris par défaut */
+  }
+
+  .mykare-logo:hover {
+    opacity: 1; /* Augmenter l'opacité au survol */
+    filter: grayscale(0%); /* Supprimer le filtre niveaux de gris au survol */
+    transform: scale(1.4) scale(1.1); /* Conserver l'agrandissement et ajouter l'effet de survol général */
+    /* Ou juste transform: scale(1.4) si l'effet de survol général ne doit pas agrandir davantage */
   }
 
 </style>
