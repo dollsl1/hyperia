@@ -666,7 +666,6 @@
   <div class="container fade-in-section">
     <h1>Nos Offres</h1>
     <div class="offers">
-  <div class="row-wrapper">
     <div class="card essentiel">
       <div class="highlight">Essentiel</div>
       <h2>490 € TTC</h2>
@@ -693,16 +692,14 @@
       <details>
         <summary>Plus de détails</summary>
         <p>
-          2 concepts + moodboard<br>
+          3 concepts + moodboard<br>
           Prompt IA multi-essais<br>
-          2 vidéos courtes<br>
-          2 visuels ads/post<br>
+          3 vidéos courtes<br>
+          3 visuels ads/post<br>
           Variante texte + 3 itérations
         </p>
       </details>
     </div>
-  </div>
-  <div style="margin-top: 2rem; display: flex; justify-content: center;">
     <div class="card intensif">
       <div class="highlight">Intensif</div>
       <h2>1490 € TTC</h2>
@@ -711,17 +708,32 @@
       <details>
         <summary>Plus de détails</summary>
         <p>
-          Atelier stratégique + 3 concepts<br>
+          Atelier stratégique + 5 concepts<br>
           Moodboard & voice-over<br>
-          3 vidéos + teaser<br>
-          3 visuels + sous-titrage<br>
+          5 vidéos + teaser<br>
+          5 visuels + sous-titrage<br>
           Script post + 5 itérations<br>
           Formats multiples prêts à l'emploi
         </p>
       </details>
     </div>
+    <div class="card personalised" style="max-width: 380px; width: 100%;">
+      <div class="highlight">Personnalisé</div>
+      <h2>Sur mesure</h2>
+      <p>Vous avez un projet unique ? Parlons-en !</p>
+      <button class="cta">Créer mon projet</button>
+      <details>
+        <summary>Plus de détails</summary>
+        <p>
+          Consultation approfondie<br>
+          Proposition stratégique<br>
+          Développement sur mesure<br>
+          Itérations adaptées<br>
+          Tarification personnalisée
+        </p>
+      </details>
+    </div>
   </div>
-</div>
 <hr class="section-separator" style="margin: 2rem auto;">
   </div>
 
@@ -736,7 +748,7 @@
       <option value="Essentiel">Essentiel</option>
       <option value="Standard">Standard</option>
       <option value="Intensif">Intensif</option>
-      <option value="Autre">Autre</option>
+      <option value="Personnalisé">Personnalisé</option>
     </select>
     <textarea name="message" placeholder="Votre message" rows="5" required style="padding: 0.9rem 1.1rem; background: #222; border: 1px solid #333; border-radius: 0.5rem; color: white; font-size: 1rem; transition: border-color 0.3s ease, box-shadow 0.3s ease; line-height: 1.6; resize: none;"></textarea>
     <button type="submit" class="cta-contact" style="margin-top: 1rem;">Envoyer</button>
@@ -781,12 +793,14 @@
 
 <script>
 // Scroll et sélection automatique
-const buttons = document.querySelectorAll('.cta');
+const buttons = document.querySelectorAll('.cta, .cta-contact');
 const offerSelect = document.getElementById('offer-select');
 
 buttons.forEach(button => {
   button.addEventListener('click', (e) => {
-    const packName = button.closest('.card').querySelector('.highlight').textContent.trim();
+    const packName = button.classList.contains('cta') 
+      ? button.closest('.card').querySelector('.highlight').textContent.trim() 
+      : 'Personnalisé';
     document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
     setTimeout(() => {
       offerSelect.value = packName;
@@ -849,16 +863,6 @@ appearOnScroll.observe(teamSection);
     /* transform: translateY(-8px) scale(1.03); */ /* ajusté pour être différent des cards d'offres */
   }
 
-  .blissim-logo {
-    opacity: 0.8; /* Rendre le logo plus visible par défaut */
-    filter: none; /* Supprimer le filtre niveaux de gris */
-  }
-
-  .blissim-logo:hover {
-    filter: invert(100%); /* Inverse les couleurs pour le rendre blanc */
-    opacity: 1; /* S'assurer qu'il est complètement opaque */
-  }
-
   .van-cleef-logo {
     transform: scale(1.4); /* Agrandir le logo de 1.4 fois */
     /* S'assurer qu'il conserve les styles par défaut de .client-logo mais en étant plus grand */
@@ -885,6 +889,17 @@ appearOnScroll.observe(teamSection);
     filter: grayscale(0%); /* Supprimer le filtre niveaux de gris au survol */
     transform: scale(1.4) scale(1.1); /* Conserver l'agrandissement et ajouter l'effet de survol général */
     /* Ou juste transform: scale(1.4) si l'effet de survol général ne doit pas agrandir davantage */
+  }
+
+  /* Styles spécifiques pour le logo Blissim */
+  .blissim-logo {
+    filter: grayscale(100%) brightness(150%); /* Rendre le logo grisé clair par défaut */
+    opacity: 0.8;
+  }
+
+  .blissim-logo:hover {
+    filter: invert(100%); /* Inverser les couleurs pour le rendre blanc au survol */
+    opacity: 1;
   }
 
 </style>
