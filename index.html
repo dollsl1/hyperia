@@ -178,16 +178,58 @@
   @keyframes drop { 0%{transform:scaleY(0)} 50%{transform:scaleY(1)} 100%{transform:scaleY(0);transform-origin:bottom} }
   body.is-scrolled .hint { opacity: 0; }
 
-  @media (max-width: 760px) {
-    .hero__stage { grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; }
-    .hero__tl { grid-column: 1; grid-row: 1; }
-    .hero__tr { grid-column: 1; grid-row: 1; justify-self: start; text-align: left; }
-    .hero__bl { grid-column: 1; grid-row: 3; }
-    .hero__br { grid-column: 1; grid-row: 3; justify-self: start; text-align: left; }
-    .shift, .work__inner { grid-template-columns: 1fr; }
-    .shift__top, .shift__bot { grid-column: 1; max-width: none; }
-    .shift__bot { justify-self: start; text-align: left; }
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px) {
     .offer__cards { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 760px) {
+    /* HERO : 4 coins → empilés, chacun sur sa propre rangée */
+    .hero { height: 200vh; }
+    .hero__stage {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto 1fr auto auto;
+      padding: 5vh 6vw;
+      gap: 1.25rem;
+    }
+    .hero__tl { grid-column: 1; grid-row: 1; max-width: none; }
+    .hero__tr { grid-column: 1; grid-row: 2; justify-self: start; text-align: left; max-width: none; }
+    .hero__bl { grid-column: 1; grid-row: 4; max-width: none; }
+    .hero__br { grid-column: 1; grid-row: 5; justify-self: start; text-align: left; }
+
+    /* SHIFT : top en haut, bot en bas, alignés à gauche */
+    .shift {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr auto;
+      padding: 10vh 6vw;
+      gap: 2.5rem;
+    }
+    .shift__top { grid-column: 1; grid-row: 1; max-width: none; }
+    .shift__bot { grid-column: 1; grid-row: 3; justify-self: start; text-align: left; max-width: none; }
+
+    /* WORK */
+    .work { padding: 8vh 6vw; }
+    .work__inner { max-width: 90%; }
+
+    /* OFFER & CTA */
+    .offer { padding: 10vh 6vw; }
+    .offer__head { margin-bottom: 2rem; }
+    .card { padding: 2rem 1.6rem; }
+    .cta { padding: 8vh 6vw; }
+  }
+
+  @media (max-width: 480px) {
+    h1 { font-size: clamp(2rem, 11vw, 2.8rem); }
+    h2 { font-size: clamp(1.7rem, 8vw, 2.3rem); }
+    h3 { font-size: 1.35rem; }
+    .hero__tag { font-size: 1.1rem; }
+    .hero__stage { padding: 4vh 5vw; gap: 1rem; }
+    .shift { padding: 8vh 5vw; gap: 2rem; }
+    .work { padding: 7vh 5vw; }
+    .offer { padding: 8vh 5vw; }
+    .cta { padding: 6vh 5vw; }
+    .btn { padding: 0.85rem 1.3rem; font-size: 0.78rem; }
+    .card { padding: 1.6rem 1.3rem; }
   }
 </style>
 </head>
