@@ -360,6 +360,7 @@ const uniforms = {
   uPadding:          { value: LOGO_PADDING },
   uChessPadding:     { value: CHESS_PADDING },
   uEaglePadding:     { value: EAGLE_PADDING },
+  uIntensity:        { value: 1.0 }, // réduit sur mobile
 };
 
 const vertexShader = /* glsl */`
@@ -372,7 +373,7 @@ const fragmentShader = /* glsl */`
   varying vec2 vUv;
   uniform sampler2D uLogo, uPhoto, uPhoto2, uPhoto3;
   uniform vec2  uMouseSmooth, uResolution, uLogoResolution, uPhotoResolution, uPhoto2Resolution, uPhoto3Resolution;
-  uniform float uVelocity, uScrollVel, uT1, uT2, uT3, uT4, uTime, uPadding, uChessPadding, uEaglePadding;
+  uniform float uVelocity, uScrollVel, uT1, uT2, uT3, uT4, uTime, uPadding, uChessPadding, uEaglePadding, uIntensity;
 
   vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}
   vec2 mod289(vec2 x){return x-floor(x*(1.0/289.0))*289.0;}
@@ -461,9 +462,10 @@ const fragmentShader = /* glsl */`
     displacement+=noiseDir*(falloff*0.05+0.006);
     displacement.x+=sin(uv.y*14.0+uTime*2.0)*0.012*scrollBoost;
     displacement.y+=(n1-0.5)*0.04*scrollBoost;
+    displacement *= uIntensity;
 
     float ca=falloff*0.008*(0.4+uVelocity*1.5)+scrollBoost*0.006;
-    vec2 caOff=dir*ca+vec2(scrollBoost*0.004,0.0);
+    vec2 caOff=(dir*ca+vec2(scrollBoost*0.004,0.0)) * uIntensity;
 
     // === LOGO (encre noire sur fond blanc) ===
     vec4 lR=sampleLogo(logoUv(uv+displacement+caOff));
@@ -532,6 +534,7 @@ function onResize(){
   const w = window.innerWidth, h = window.innerHeight;
   renderer.setSize(w, h, false);
   uniforms.uResolution.value.set(w, h);
+  uniforms.uIntensity.value = w < 760 ? 0.35 : 1.0;
 }
 window.addEventListener('resize', onResize);
 onResize();
